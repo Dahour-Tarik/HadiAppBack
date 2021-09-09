@@ -16,7 +16,6 @@ public class FactrureRecController {
     @Autowired
     private FactureRecService factureRecService;
 
-    //TODO Search facture recurent
     @PostMapping("/addFactureRec")
     public ResponseEntity<FactureRecurrente> addFactureRec(@RequestBody FactureRecurrente factureRecurrente){
         FactureRecurrente factureRecurrente1 = factureRecService.addFactureRec(factureRecurrente);

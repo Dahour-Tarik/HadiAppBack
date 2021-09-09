@@ -18,7 +18,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @RequestMapping("/doc")
@@ -50,10 +53,16 @@ public class DocController {
         return "doc";
     }
 
-    @GetMapping("/getdocs")
-    public ResponseEntity<HashMap<String, Object>> getFilesAndFolders() throws JSONException {
-        List<Doc> docs = docService.getFiles(1L);
-        List<Repo> folders = repService.getRepos(1L);
+    @GetMapping("/getDocUser/{idUser}")
+    public ResponseEntity<List<Doc>> getDocsUser(@PathVariable Long idUser){
+        List<Doc> docs = docService.getFiles(idUser);
+        return new ResponseEntity<>(docs, HttpStatus.OK);
+    }
+
+    @GetMapping("/getdocs/{idUser}")
+    public ResponseEntity<HashMap<String, Object>> getFilesAndFolders(@PathVariable Long idUser) throws JSONException {
+        List<Doc> docs = docService.getFiles(idUser);
+        List<Repo> folders = repService.getRepos(idUser);
 
         HashMap<String, Object> sampleObject = new HashMap<>();
         HashMap<String, Object> fileMap = new HashMap<>();
@@ -87,7 +96,7 @@ public class DocController {
             obj.put("id","doc_"+docs.get(j).getIdDoc());
             obj.put("name",docs.get(j).getDocName());
             obj.put("size",docs.get(j).getDocSize());
-            obj.put("parentId",String.valueOf(docs.get(j).getRep().getId()));
+            obj.put("parentId",String.valueOf(docs.get(j).getRepo().getId()));
             if(docs.get(j).getDocCreationDate() != null) {obj.put("modDate", docs.get(j).getDocCreationDate());}
             else{ obj.put("modDate", docs.get(j).getDocCreationDate()); }
             String o = "doc_"+docs.get(j).getIdDoc();

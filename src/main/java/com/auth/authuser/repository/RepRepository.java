@@ -16,7 +16,7 @@ public interface RepRepository extends JpaRepository<Repo, Long> {
     //@Query(value = "select r from Repo r where r.rep_id like ?1", nativeQuery = true)
     //Repo findRepoEnfantsById(Long id);
     @Modifying
-    @Query(value = "update repo set parents_rep_id=:newFolderId where rep_id=:folderId", nativeQuery = true)
+    @Query(value = "update repo set parents_rep_id=:newFolderId where id=:folderId", nativeQuery = true)
     @Transactional
     void moveFolder(Long folderId, Long newFolderId);
 }

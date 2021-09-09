@@ -13,7 +13,6 @@ public class Repo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rep_id")
     private Long id;
     @Column(name = "rep_name", length = 65)
     private String name;

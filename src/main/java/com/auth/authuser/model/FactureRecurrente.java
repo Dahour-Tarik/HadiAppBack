@@ -13,6 +13,10 @@ public class FactureRecurrente extends ClientDoc{
     private Date dateFin;
     private String frequence;
 
+    public FactureRecurrente(){
+
+    }
+
     public FactureRecurrente(String nomClientDoc, String description, int quantite, String designation, Date dateCreation, String basePrix, float prixHt, float tauxTva, float prixTtc, float reduction, String typeDoc, Date dateFin, String frequence) {
         super(nomClientDoc, description, quantite, designation, dateCreation, basePrix, prixHt, tauxTva, prixTtc, reduction, typeDoc);
         this.dateFin = dateFin;

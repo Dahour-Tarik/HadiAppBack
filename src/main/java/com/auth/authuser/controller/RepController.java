@@ -25,15 +25,14 @@ public class RepController {
         List<Repo> repos = repService.getAll();
         return new ResponseEntity(repos,HttpStatus.OK);
     }
-    @GetMapping("/{idUser}/{idRepo}")
-    public List<Repo> getFolder(@PathVariable Long idUser, @PathVariable Long idRepo){
+    @GetMapping("/{idUser}")
+    public List<Repo> getFolder(@PathVariable Long idUser){
         List<Repo> repo = repService.getRepos(idUser);
         return repo;
     }
 
    @PostMapping(value="/creeRepo", consumes={"application/json"})
     public ResponseEntity<Repo> addFolder(@RequestBody Repo repo) throws Exception {
-        System.out.println(repo.getParents().getId());
         Repo repTemp = repService.addRepo(repo);
         historyService.addFolderElementHistory(null, repTemp, repTemp.getUser(), repTemp.getSizeRepo(), new Date(), "created",repTemp.getName());
 

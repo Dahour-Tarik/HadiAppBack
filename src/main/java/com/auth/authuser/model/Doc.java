@@ -37,6 +37,9 @@ public class Doc {
     @OneToMany(mappedBy = "doc", cascade = CascadeType.ALL)
     private List<History> historyList;
 
+    @OneToMany(mappedBy = "doc", cascade = CascadeType.ALL)
+    private List<EmailHistory> email_history;
+
     public Doc(){
 
     }
@@ -93,11 +96,11 @@ public class Doc {
     }
 
     @JsonBackReference(value="repo-doc")
-    public Repo getRep() {
+    public Repo getRepo() {
         return repo;
     }
 
-    public void setRep(Repo rep) {
+    public void setRepo(Repo rep) {
         this.repo = rep;
     }
 
@@ -125,5 +128,13 @@ public class Doc {
 
     public void setHistoryList(List<History> historyList) {
         this.historyList = historyList;
+    }
+
+    public List<EmailHistory> getEmail_history() {
+        return email_history;
+    }
+
+    public void setEmail_history(List<EmailHistory> email_history) {
+        this.email_history = email_history;
     }
 }

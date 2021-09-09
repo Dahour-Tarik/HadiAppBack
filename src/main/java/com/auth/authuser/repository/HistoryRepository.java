@@ -16,11 +16,11 @@ public interface HistoryRepository extends JpaRepository<History, Long> {
     List<History> findAllByUserId(Long userId);
     Optional<History> findById(Long id);
     @Modifying
-    @Query(value = "insert into history (change_date, media_extension, media_name, media_size, media_state, media_type,user_id,doc_id_doc,repo_rep_id) VALUES (:date,:docType,:docName,:docSize,:state,:docType,:userId,:idDoc,:repId)", nativeQuery = true)
+    @Query(value = "insert into history (change_date, media_extension, media_name, media_size, media_state, media_type,user_id,doc_id_doc,repo_id) VALUES (:date,:docType,:docName,:docSize,:state,:docType,:userId,:idDoc,:repId)", nativeQuery = true)
     @Transactional
     void addCreateHistory(@Param("idDoc") Integer idDoc, @Param("docName") String docName,@Param("docSize") Long docSize, @Param("docType") String docType, @Param("repId") Long repId,@Param("userId") Long userId, @Param("state") String state,@Param("date") Date date);
     @Modifying
-    @Query(value = "insert into history (change_date, media_extension, media_name, media_size, media_state, media_type,user_id,repo_rep_id) VALUES (:date,:docType,:docName,:docSize,:state,:docType,:userId,:repId)", nativeQuery = true)
+    @Query(value = "insert into history (change_date, media_extension, media_name, media_size, media_state, media_type,user_id,repo_id) VALUES (:date,:docType,:docName,:docSize,:state,:docType,:userId,:repId)", nativeQuery = true)
     @Transactional
     void addDeleteHistory( @Param("docName") String docName,@Param("docSize") Long docSize, @Param("docType") String docType, @Param("repId") Long repId,@Param("userId") Long userId, @Param("state") String state,@Param("date") Date date);
 }

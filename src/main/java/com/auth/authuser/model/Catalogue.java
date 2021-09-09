@@ -16,6 +16,10 @@ public class Catalogue {
     @OneToMany(mappedBy="catalogue")
     private List<Article> articleList;
 
+    public Catalogue(){
+
+    }
+
     public Catalogue(Long nbArticle) {
         this.nbArticle = nbArticle;
     }

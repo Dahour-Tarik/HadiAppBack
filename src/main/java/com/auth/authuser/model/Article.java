@@ -23,6 +23,10 @@ public class Article {
     @ManyToOne
     private Catalogue catalogue;
 
+    public Article(){
+
+    }
+
     public Article(String designation, String description, int basePrix, float prixHt, float tauxTva, float prixTtc, Company company, Catalogue catalogue) {
         this.designation = designation;
         this.description = description;

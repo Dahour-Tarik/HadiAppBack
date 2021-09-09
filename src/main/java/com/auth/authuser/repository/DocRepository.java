@@ -17,7 +17,7 @@ public interface DocRepository extends JpaRepository<Doc, Integer> {
     Optional<Doc> getFileByName(String name);
     Optional<Doc> findAllByIdDoc(Integer fileId);
     @Modifying
-    @Query(value = "update doc set repo_rep_id=:destinationId where id_doc=:idDoc", nativeQuery = true)
+    @Query(value = "update doc set repo_id=:destinationId where id_doc=:idDoc", nativeQuery = true)
     @Transactional
     void updatePathDoc(Long destinationId, Integer idDoc);
     @Query(value = "select * from doc d where d.company_id=:userId", nativeQuery = true)

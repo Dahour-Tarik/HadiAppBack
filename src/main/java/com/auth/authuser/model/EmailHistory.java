@@ -24,6 +24,10 @@ public class EmailHistory {
     @ManyToOne
     private ClientDoc clientDoc;
 
+    public EmailHistory(){
+
+    }
+
     public EmailHistory(Date dateSending, String typeDoc, Company company, Accountant accountant, Doc doc, ClientDoc clientDoc) {
         this.dateSending = dateSending;
         this.typeDoc = typeDoc;
