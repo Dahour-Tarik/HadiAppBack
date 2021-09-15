@@ -110,16 +110,17 @@ public class DocController {
 
 
     @PostMapping("/uploadFiles")
-    public String uploadMultipleFiles(@RequestParam("files") MultipartFile[] files,
+    public ResponseEntity<Doc> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files,
                                       @RequestParam("idRep") Long idRep,
                                       @RequestParam("idUser") Long idUser ) throws Exception {
+        Doc doc = null;
         for (MultipartFile file: files) {
-            Doc doc = docService.saveFile(file, idRep, idUser,file.getSize(),new Date());
+            doc = docService.saveFile(file, idRep, idUser,file.getSize(),new Date());
             historyService.addFileElementHistory(file, idRep, idUser, file.getSize(),doc.getIdDoc(), new Date(), "created",doc.getDocName());
             sendEmailService.addEmail(new Date(),"Document", doc.getCompany(),doc.getCompany().getChefMission(),doc,null);
             sendEmailService.sendEmail(doc.getCompany().getChefMission().getEmail(), "l'entreprise "+doc.getCompany().getNomEntreprise()+" vient de deposer un documernt", "depos fichier");
         }
-        return "redirect:/doc/folders/"+idRep+"/"+idUser;
+        return new ResponseEntity<>(doc, HttpStatus.CREATED);
     }
 
     @GetMapping("/downloadFile/{fileId}")
